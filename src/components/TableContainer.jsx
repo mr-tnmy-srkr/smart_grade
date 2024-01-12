@@ -1,12 +1,18 @@
 import TableRow from "./TableRow";
 import {
-  studentsDataOfClassOne,
-  studentsDataOfClassTwo,
-  studentsDataOfClassThree,
+  studentsData
 } from "../data/studentsData";
 
 export default function TableContainer() {
-  console.log(studentsDataOfClassOne);
+  const classOneStudents = studentsData.filter(
+    (student) => student.classes === "one"
+  );
+  const classTwoStudents = studentsData.filter(
+    (student) => student.classes === "two"
+  );
+  const classThreeStudents = studentsData.filter(
+    (student) => student.classes === "three"
+  );
 
   return (
     <table className="w-full">
@@ -23,35 +29,14 @@ export default function TableContainer() {
         </tr>
       </thead>
       <tbody>
-        <tr className="bg-white/5">
-          <td className="p-5 text-sm md:text-xl" colSpan="4">
-            Class One
-          </td>
-        </tr>
-
-        {studentsDataOfClassOne?.map((data) => (
-          <TableRow key={data.id} studentInfo={data} />
-        ))}
-
-        <tr className="bg-white/5">
-          <td className="p-5 text-sm md:text-xl" colSpan="4">
-            Class Two
-          </td>
-        </tr>
-
-        {studentsDataOfClassTwo?.map((data) => (
-          <TableRow key={data.id} studentInfo={data} />
-        ))}
-
-        <tr className="bg-white/5">
-          <td className="p-5 text-sm md:text-xl" colSpan="4">
-            Class Three
-          </td>
-        </tr>
-
-        {studentsDataOfClassThree?.map((data) => (
-          <TableRow key={data.id} studentInfo={data} />
-        ))}
+        {<TableRow StudentClass="Class One" studentInfo={classOneStudents} />}
+        {<TableRow StudentClass="Class Two" studentInfo={classTwoStudents} />}
+        {
+          <TableRow
+            StudentClass="Class Three"
+            studentInfo={classThreeStudents}
+          />
+        }
       </tbody>
     </table>
   );
